@@ -15,6 +15,7 @@ class Director:
             self.askToGuess()
             Card.nextCard(self)
             self.earn_points()
+            self.score += self.totalScore
             self.getInputs()
 
 
@@ -35,18 +36,29 @@ class Director:
             
     def earn_points(self):
         self.score = 300
+        self.totalScore = 0
+        self.score+=self.totalScore
         if self.userGuess =="h" and self.value > 5:
-          self.score+=100
-          print(f"Your score is: {self.score}")
+            self.totalScore+=100
+            print(f"Your score is: {self.totalScore}")
         elif self.userGuess == "l" and self.value < 5:
-            self.score+=100
-            print(f"Your score is: {self.score}")
+            self.totalScore+=100
+            if self.totalScore >= 0:
+                print(f"Your score is: {self.totalScore}")
+            else:
+                print("You loose!") 
         elif self.userGuess == "h" and self.value < 5:
-            self.score-=75 
-            print(f"Your score is: {self.score}")
+            self.totalScore-=75 
+            if self.totalScore >= 0:
+                print(f"Your score is: {self.totalScore}")
+            else:
+                print("You loose!") 
         elif self.userGuess == "l" and self.value > 5:
-            self.score-=75
-            print(f"Your score is: {self.score}")
+            self.totalScore-=75
+            if self.totalScore >= 0:
+                print(f"Your score is: {self.totalScore}")
+            else:
+                print("You loose!") 
         else:
             print("you have lost!")
 
